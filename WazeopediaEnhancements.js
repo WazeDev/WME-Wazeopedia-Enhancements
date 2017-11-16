@@ -1,14 +1,12 @@
 // ==UserScript==
 // @name         Wazeopedia Enhancements
 // @namespace    https://greasyfork.org/users/30701-justins83-waze
-// @version      2017.11.16.01
+// @version      2017.11.16.02
 // @description  Fixes anchor scrolling on wazeopedia due to having a fixed height header
 // @author       JustinS83
 // @include      https://wazeopedia.waze.com*
 // @grant        none
 // ==/UserScript==
-
-//Thanks to https://stackoverflow.com/questions/10732690/offsetting-an-html-anchor-to-adjust-for-fixed-header for the anchor scrolling fix
 
 (function() {
     'use strict';
@@ -29,7 +27,7 @@
         $('a[href*=#]:not([href=#])').click(function() {
             if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
                 var target = $(this.hash);
-                target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+                target = target.length ? target : $('[name="' + this.hash.slice(1) +'"]');
                 if (target.length) {
                     $('html,body').animate({
                         scrollTop: target.offset().top - 60 //offsets for fixed header
@@ -38,8 +36,10 @@
                 }
             }
         });
+        $(window).load(function(){setTimeout(function(){
         //Executed on page load with URL containing an anchor tag.
         if($(location.href.split("#")[1])) {
+            //debugger;
             var target = $('#'+location.href.split("#")[1]);
             if (target.length) {
                 $('html,body').animate({
@@ -47,6 +47,6 @@
                 }, 250);
                 return false;
             }
-        }
+        }},25);});
     }
 })();
