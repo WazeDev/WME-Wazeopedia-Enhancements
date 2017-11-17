@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Wazeopedia Enhancements
 // @namespace    https://greasyfork.org/users/30701-justins83-waze
-// @version      2017.11.16.02
+// @version      2017.11.17.01
 // @description  Fixes anchor scrolling on wazeopedia due to having a fixed height header
 // @author       JustinS83
 // @include      https://wazeopedia.waze.com*
@@ -32,7 +32,7 @@
                     $('html,body').animate({
                         scrollTop: target.offset().top - 60 //offsets for fixed header
                     }, 250);
-                    return false;
+                    //return false;
                 }
             }
         });
